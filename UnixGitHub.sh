@@ -8,10 +8,10 @@ for year in {2006..2015}
 				     #http://www.minetad.gob.es/energia/balances/Publicaciones/ElectricasMensuales/2009/Diciembre_2009.zip
 				     #http://www.minetad.gob.es/energia/balances/Publicaciones/ElectricasMensuales/2009/Agosto%202009.zip
 				     #http://www.minetad.gob.es/energia/balances/Publicaciones/ElectricasMensuales/2006/Enero_2006.zip
-				unzip -j  "$year"/"$month"/"$month"_"$year"  -d "$year"/"$month"
+				unzip -nj  "$year"/"$month"/"$month"_"$year".zip '*127P*' -d "$year"/"$month"
 
-				rm "$year"/"$month"/"$month"_"$year".zip
-				rm $(ls "$year"/"$month"/*.txt|grep -v T_127P)
+				#rm "$year"/"$month"/"$month"_"$year".zip
+				#rm $(ls "$year"/"$month"/*.txt|grep -v T_127P)
 				
 
 			done
