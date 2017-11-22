@@ -1,6 +1,10 @@
-#curl http://www.ine.es/daco/daco42/codmun/cod_ccaa_provincia.htm>CAyP.html
-#textutil -convert txt CAyP.html
-#rm CAyP.html
+# Este script descarga La relación entre Provincias y Comunidades Autónomas y lo almacena en un archivo .txt
+# Con este crea las carpetas de cada Comunidad Autonoma y Provincia
+
+
+curl http://www.ine.es/daco/daco42/codmun/cod_ccaa_provincia.htm>CAyP.html
+textutil -convert txt CAyP.html
+rm CAyP.html
 for ComAuto in "Cataluña" "Andalucía" "Aragón" "Asturias, Principado de" "Balears, Illes" "Canarias" "Cantabria" "Castilla y León" "Castilla-La Mancha"  "Comunitat Valenciana" "Extremadura"  "Galicia" "Madrid, Comunidad de" "Murcia, Región de" "Navarra, Comunidad Foral de" "País Vasco" "Rioja, La" "Ceuta" "Melilla"
 	do
 		lineaC=$(grep -w -n -e "^$ComAuto" CAyP.txt|head -n 1|cut -d : -f 1)

@@ -1,3 +1,5 @@
+# Este script busca en cada archivo T_127P_*.txt la linea correspondiente a cada Provincia y selecciona el dato del combustible para agregarlo al archivo correspondiente
+# 
 for year in 06 07 08 09 10 11 12 13 14 15
 	do 
 		for month in 01 02 03 04 05 06 07 08 09 10 11 12
@@ -8,26 +10,35 @@ for year in 06 07 08 09 10 11 12 13 14 15
 						
 						File=$(find . -type d|grep -i -w */*_*$Prov*)
 
+
+						#Combustible nuclear
 						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $2}'|awk -F. '{print $1$2$3}' | sed "1 i\   
-						20$year$month   " >> $File/COMBUSTIBLENUCLEAR.txt
+						20$year$month   " >> $File/COMBUSTIBLENUCLEAR.txt 
 
-						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $3 }'|awk -F. '{print $1$2$3}' | sed "1 i\   
-						20$year$month   " >> $File/CARBONES.txt
+						#Carbones
+						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $3}'|awk -F. '{print $1$2$3}' | sed "1 i\   
+						20$year$month   " >> $File/CARBONES.txt 
 
-						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $4 }'|awk -F. '{print $1$2$3}' | sed "1 i\   
-						20$year$month   " >> $File/LIGNITOS.txt
+						#Lignitos
+						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $4}'|awk -F. '{print $1$2$3}' | sed "1 i\   
+						20$year$month   " >> $File/LIGNITOS.txt 
 
-						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $5 }'|awk -F. '{print $1$2$3}' | sed "1 i\   
-						20$year$month   " >> $File/FUEL.txt
+						#Fuel
+						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $5}'|awk -F. '{print $1$2$3}' | sed "1 i\   
+						20$year$month   " >> $File/FUEL.txt 
 
-						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $6 }'|awk -F. '{print $1$2$3}' | sed "1 i\   
-						20$year$month   " >> $File/GASNATURAL.txt
-						
-						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $7 }'|awk -F. '{print $1$2$3}' | sed "1 i\   
-						20$year$month   " >> $File/OTROSCOMBUSTIBLES.txt
-						
-						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $8 }'|awk -F. '{print $1$2$3}' | sed "1 i\   
-						20$year$month   " >> $File/TOTAL.txt
+						#Gas natural
+						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $6}'|awk -F. '{print $1$2$3}' | sed "1 i\   
+						20$year$month   " >> $File/GASNATURAL.txt 
+
+						#Otros combustibles
+						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $7}'|awk -F. '{print $1$2$3}' | sed "1 i\   
+						20$year$month   " >> $File/OTROSCOMBUSTIBLES.txt 
+
+						#Total
+						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $8}'| awk  '{print $1}'|awk -F. '{print $1$2$3}' | sed "1 i\   
+						20$year$month   " >> $File/TOTAL.txt 
+
 
 
 					done 

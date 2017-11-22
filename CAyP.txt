@@ -10,6 +10,7 @@
 		Cuentas Anuales 
 		Encomiendas de gestión 
 		Perfil del contratante 
+		Consejo Superior de Estadística y otros órganos estadísticos colegiados 
 		Calidad y Código de Buenas Prácticas  
 		Organización estadística en España
 		Esquema general 
@@ -109,6 +110,7 @@
 		Publicaciones
 		Catálogo de Publicaciones 
 		Publicaciones de descarga gratuita 
+		InfografÃ­as  
 		Colección Cifras INE 
 		Revistas especializadas 
 		Documentos de trabajo 
