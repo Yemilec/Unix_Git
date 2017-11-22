@@ -5,7 +5,7 @@ for ComAuto in "Cataluña" "Andalucía" "Aragón" "Asturias, Principado de" "Bal
 	do
 		lineaC=$(grep -w -n -e "^$ComAuto" CAyP.txt|head -n 1|cut -d : -f 1)
 		CodCom=$(head -n $lineaC CAyP.txt|tail -n 2|head -n 1)
-		NomCom=$(head -n $lineaC CAyP.txt|tail -n 1)
+		NomCom=$(head -n $lineaC CAyP.txt|tail -n 1|awk '{print $1$2$3}' |awk -F, '{print $1$2}')
 		mkdir "$CodCom"_"$NomCom"
 	done
 
@@ -14,8 +14,8 @@ for Prov in "Almería" "Cádiz" "Córdoba" "Granada" "Huelva" "Jaén" "Málaga" 
 	do	
 		lineaP=$(grep -w -n -e "^$Prov" CAyP.txt|tail -n 1|cut -d : -f 1)
 		CodCom2=$(head -n $lineaP CAyP.txt|tail -n 4|head -n 1)
-		NomCom2=$(head -n $lineaP CAyP.txt|tail -n 3|head -n 1)
+		NomCom2=$(head -n $lineaP CAyP.txt|tail -n 3|head -n 1|awk '{print $1$2$3}' |awk -F, '{print $1$2}')
 		CodProv=$(head -n $lineaP CAyP.txt|tail -n 2|head -n 1)
-		NomProv=$(head -n $lineaP CAyP.txt|tail -n 1|cut -d/ -f1)
+		NomProv=$(head -n $lineaP CAyP.txt|tail -n 1|awk '{print $1$2$3$4}'|awk -F, '{print $1$2}'|cut -d/ -f1)
 		mkdir "$CodCom2"_"$NomCom2"/"$CodProv"_"$NomProv"
 	done 
