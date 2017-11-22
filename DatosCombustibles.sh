@@ -2,10 +2,17 @@ for year in 06 07 08 09 10 11 12 13 14 15
 	do 
 		for month in 01 02 03 04 05 06 07 08 09 10 11 12
 			do
-				for Prov in  "Almería" "Cádiz" "Córdoba" "Granada" "Huelva" "Jaén" "Málaga" "Sevilla" "Huesca" "Teruel" "Zaragoza" "Asturias" "Balears, Illes" "Palmas, Las" "Santa Cruz de Tenerife" "Cantabria" "Ávila" "Burgos" "León" "Palencia" "Salamanca" "Segovia" "Soria" "Valladolid" "Zamora" "Albacete"  "Ciudad Real" "Cuenca" "Guadalajara" "Toledo" "Barcelona" "Girona" "Lleida" "Tarragona" "Alicante/Alacant" "Castellón/Castelló" "Valencia/València" "Badajoz" "Cáceres" "Coruña, A" "Lugo" "Ourense" "Pontevedra" "Madrid" "Navarra" "Murcia" "Araba/Álava" "Bizkaia" "Gipuzkoa"  "Rioja, La"  "Ceuta" "Melilla"
+				for Prov in  "Almer[ií]a" "C*diz" "C*rdoba" "Granada" "Huelva" "Ja[ée]n" "M*laga" "Sevilla" "Huesca" "Teruel" "Zaragoza" "Asturias" "Balear" "Palmas" "Tenerife" "Cantabria" "[AÁ]vila" "Burgos" "Le[óo]n" "Palencia" "Salamanca" "Segovia" "Soria" "Valladolid" "Zamora" "Albacete"  "Real" "Cuenca" "Guadalajara" "Toledo" "Barcelona" "Girona" "Lleida" "Tarragona" "Alicante" "Castell[óo]n" "Valencia" "Badajoz" "C*ceres" "Coru" "Lugo" "O*rense" "Pontevedra" "Madrid" "Navarra" "Murcia" "A[rl]a[bv]a" "[VB]iz[ck]a[iy]a" "G*ipuz*"  "Rioja"  "Ceuta" "Melilla"
 				
 					do 
-						grep -i -e "^$Prov"  20"$year"/T_127P_$month*.txt
+						echo "$Prov" "$year" "$month"
+						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt
+						
+
+						
+
+
+						find . -type d|grep -w */*_*$Prov*
 
 					done 
 				
