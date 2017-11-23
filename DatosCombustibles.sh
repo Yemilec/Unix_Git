@@ -1,5 +1,6 @@
 # Este script busca en cada archivo T_127P_*.txt la linea correspondiente a cada Provincia y selecciona el dato del combustible para agregarlo al archivo correspondiente
 # 
+declare -A combustibles=( [2]="COMBUSTIBLENUCLEAR" [3]="CARBONES" [4]="CLIGNITOS"  [5]="FUEL" [6]="GASNATURAL" [7]="OTROSCOMBUSTIBLES" [8]="TOTAL")
 for year in 06 07 08 09 10 11 12 13 14 15
 	do 
 		for month in 01 02 03 04 05 06 07 08 09 10 11 12
@@ -10,48 +11,34 @@ for year in 06 07 08 09 10 11 12 13 14 15
 						
 						File=$(find . -type d|grep -i -w */*_*$Prov*)
 
+						for Comb in combustibles[@] 
+							do
+								# if [ "$Comb" -eq 2 ]
+								# 	then
+								# 		NomComb=COMBUSTIBLENUCLEAR
+								# elif [ "$Comb" -eq 3 ]
+								# 	then
+								# 		NomComb=CARBONES
+								# elif [ "$Comb" -eq 4 ]
+								# 	then
+								# 		NomComb=CLIGNITOS
+								# elif [ "$Comb" -eq 5 ]
+								# 	then
+								# 		NomComb=FUEL
+								# elif [ "$Comb" -eq 6 ]
+								# 	then
+								# 		NomComb=GASNATURAL
+								# elif [ "$Comb" -eq 7 ]
+								# 	then
+								# 		NomComb=OTROSCOMBUSTIBLES
+								# elif [ "$Comb" -eq 8 ]
+								# 	then
+								# 		NomComb=TOTAL
+								# fi
+								
+								grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -v i=$Comb -F'  '+ '{print $i}' | awk  '{print $1}'|awk -v y=$year -v m=$month -F. '{print 20 y m, $1$2$3}' >> $File/"$NomComb".txt	
 
-						#Combustible nuclear
-						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $2}'|awk -F. '{print $1$2$3}' | sed "1 i\   
-						20$year$month   " >> $File/COMBUSTIBLENUCLEAR.txt 
-
-						#Carbones
-						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $3}'|awk -F. '{print $1$2$3}' | sed "1 i\   
-						20$year$month   " >> $File/CARBONES.txt 
-
-						#Lignitos
-						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $4}'|awk -F. '{print $1$2$3}' | sed "1 i\   
-						20$year$month   " >> $File/LIGNITOS.txt 
-
-						#Fuel
-						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $5}'|awk -F. '{print $1$2$3}' | sed "1 i\   
-						20$year$month   " >> $File/FUEL.txt 
-
-						#Gas natural
-						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $6}'|awk -F. '{print $1$2$3}' | sed "1 i\   
-						20$year$month   " >> $File/GASNATURAL.txt 
-
-						#Otros combustibles
-						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $7}'|awk -F. '{print $1$2$3}' | sed "1 i\   
-						20$year$month   " >> $File/OTROSCOMBUSTIBLES.txt 
-
-						#Total
-						grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -F'  '+ '{print $8}'| awk  '{print $1}'|awk -F. '{print $1$2$3}' | sed "1 i\   
-						20$year$month   " >> $File/TOTAL.txt 
-
-
-
+							done
 					done 
-				
-
 			done
 	done 
-
-
-
-
-# for Prov in Corun.a
-# 	do
-# 		grep $Prov *.txt
-
-# 		grep -i Tarragona T_127P_04011.txt|cut -c 22-32 
