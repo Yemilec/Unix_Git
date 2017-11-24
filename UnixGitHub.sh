@@ -2,7 +2,7 @@
 # publicadas por el Ministerio de Industria, del 2006 al 2015.
 # Los guarda en el directorio de su año
 
-BASEURI = http://www.minetad.gob.es/energia/balances/Publicaciones/ElectricasMensuales
+BASEURI="http://www.minetad.gob.es/energia/balances/Publicaciones/ElectricasMensuales"
 for year in {2006..2015}
 	do 
 		mkdir $year
