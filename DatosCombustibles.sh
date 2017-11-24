@@ -1,6 +1,5 @@
 # Este script busca en cada archivo T_127P_*.txt la linea correspondiente a cada Provincia y selecciona el dato del combustible para agregarlo al archivo correspondiente
 # 
-declare -A combustibles=( [2]="COMBUSTIBLENUCLEAR" [3]="CARBONES" [4]="CLIGNITOS"  [5]="FUEL" [6]="GASNATURAL" [7]="OTROSCOMBUSTIBLES" [8]="TOTAL")
 for year in 06 07 08 09 10 11 12 13 14 15
 	do 
 		for month in 01 02 03 04 05 06 07 08 09 10 11 12
@@ -11,8 +10,14 @@ for year in 06 07 08 09 10 11 12 13 14 15
 						
 						File=$(find . -type d|grep -i -w */*_*$Prov*)
 
-						for Comb in combustibles[@] 
+						for Comb in "2:COMBUSTIBLENUCLEAR"  "3:CARBONES" "4:CLIGNITOS"  "5:FUEL" "6:GASNATURAL" "7:OTROSCOMBUSTIBLES" "8:TOTAL"
+
 							do
+								Comb1=$( echo "$Comb" |awk -F: '{print $1}')
+								Comb2=$( echo "$Comb" |awk -F: '{print $2}')
+
+								
+
 								# if [ "$Comb" -eq 2 ]
 								# 	then
 								# 		NomComb=COMBUSTIBLENUCLEAR
@@ -36,7 +41,7 @@ for year in 06 07 08 09 10 11 12 13 14 15
 								# 		NomComb=TOTAL
 								# fi
 								
-								grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -v i=$Comb -F'  '+ '{print $i}' | awk  '{print $1}'|awk -v y=$year -v m=$month -F. '{print 20 y m, $1$2$3}' >> $File/"$NomComb".txt	
+								grep -i   "$Prov"  20"$year"/T_127P_$month*.txt | awk -v i=$Comb1 -F'  '+ '{print $i}' | awk  '{print $1}'|awk -v y=$year -v m=$month -F. '{print 20 y m, $1$2$3}' >> $File/"$Comb2".txt	
 
 							done
 					done 
