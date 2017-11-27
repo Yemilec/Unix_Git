@@ -3,10 +3,11 @@
 # Los guarda en el directorio de su año
 
 BASEURI="http://www.minetad.gob.es/energia/balances/Publicaciones/ElectricasMensuales"
+meses=('Enero' 'Febrero' 'Marzo' 'Abril'  'Mayo' 'Junio' 'Julio' 'Agosto' 'Septiembre' 'Octubre' 'Noviembre' 'Diciembre')
 for year in {2006..2015}
 	do 
 		mkdir $year
-		for month in Enero Febrero Marzo Abril  Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre
+		for month in "${meses[@]}"
 			do
 				mkdir "$year"/$month
 				curl -s "$BASEURI/${year}/{$month}{%20,_}{$year}.zip" >"$year"/"$month"/"$month"_"$year".zip  
