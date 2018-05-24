@@ -1,5 +1,5 @@
 # Este script descarga La relación entre Provincias y Comunidades Autónomas y lo almacena en un archivo .txt
-# Con este crea las carpetas de cada Comunidad Autonoma y Provincia
+# Se crean las carpetas de cada Comunidad Autonoma y dentro ellas las de las Provincias que le corresponden.
 
 
 curl http://www.ine.es/daco/daco42/codmun/cod_ccaa_provincia.htm>CAyP.html
@@ -12,6 +12,7 @@ for ComAuto in "Cataluña" "Andalucía" "Aragón" "Asturias, Principado de" "Bal
 		NomCom=$(head -n $lineaC CAyP.txt|tail -n 1|awk '{print $1$2$3}' |awk -F, '{print $1$2}')
 		mkdir "$CodCom"_"$NomCom"
 	done
+	#se crean las carpetas de las comunidades autónomas 
 
 
 for Prov in "Almería" "Cádiz" "Córdoba" "Granada" "Huelva" "Jaén" "Málaga" "Sevilla" "Huesca" "Teruel" "Zaragoza" "Asturias" "Balears, Illes" "Palmas, Las" "Santa Cruz de Tenerife" "Cantabria" "Ávila" "Burgos" "León" "Palencia" "Salamanca" "Segovia" "Soria" "Valladolid" "Zamora" "Albacete"  "Ciudad Real" "Cuenca" "Guadalajara" "Toledo" "Barcelona" "Girona" "Lleida" "Tarragona" "Alicante/Alacant" "Castellón/Castelló" "Valencia/València" "Badajoz" "Cáceres" "Coruña, A" "Lugo" "Ourense" "Pontevedra" "Madrid" "Navarra" "Murcia" "Araba/Álava" "Bizkaia" "Gipuzkoa"  "Rioja, La"  "Ceuta" "Melilla"
@@ -22,4 +23,6 @@ for Prov in "Almería" "Cádiz" "Córdoba" "Granada" "Huelva" "Jaén" "Málaga" 
 		CodProv=$(head -n $lineaP CAyP.txt|tail -n 2|head -n 1)
 		NomProv=$(head -n $lineaP CAyP.txt|tail -n 1|awk '{print $1$2$3$4}'|awk -F, '{print $1$2}'|cut -d/ -f1)
 		mkdir "$CodCom2"_"$NomCom2"/"$CodProv"_"$NomProv"
+		#se crean las carpetas de las provincias dentro de su correspondiente Comunidad Autónoma
+		 
 	done 
