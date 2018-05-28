@@ -1,6 +1,10 @@
+# Se requiere la ejecución previa de CAyP.sh
+
 # Este script descarga los archivos  mensuales de PRODUCCION BRUTA DE ENERGIA TERMOELECTRICA POR PROVINCIAS SEGUN EL COMBUSTIBLE 
 # publicadas por el Ministerio de Industria, del 2006 al 2015.
-# Los guarda en el directorio de su año
+# Los guarda en el directorio correspondiente a su año.
+# Selecciona los datos de cada tipo de combustible por mes, año y provincia, creando un archivo .txt del combustible 
+# el cual estará contenido en la carpeta de dicha provincia.
 
 
 #Variables FOR
@@ -24,13 +28,11 @@ for year in "${years[@]}"
 				IFS=","; set -- $month  # $1 == Nombre, $2 == Número
 
 				mkdir "20$year"/${1}
-				curl -s "$BASEURI/20${year}/${1}{%20,_}{20$year}.zip" >"20$year"/"${1}"/"${1}"_"20$year".zip  
-				#descarga del archivo .zip
-				
+				curl -s "$BASEURI/20${year}/${1}{%20,_}{20$year}.zip" >"20$year"/"${1}"/"${1}"_"20$year".zip 
 				unzip -njq  "20$year"/"${1}"/"${1}"_"20$year".zip '*127P*' -d "20$year" 
-				#se descomprime el archivo de combustibles
+				rm -r "20$year"/${1} 
 
-				rm -r "20$year"/${1} #se elimina las carpetas que ya no se necesitan
+				#descarga del archivo .zip, se descomprime y se eliminan las carpetas que ya no se necesitan
 
 				mnt=${2}
 
@@ -51,12 +53,9 @@ for year in "${years[@]}"
 								#se define el nombre de cada combustible
 								
 								grep -i   "$Prov"  20"$year"/T_127P_$mnt*.txt | awk -v i=$Comb1 -F'  '+ '{print $i}' | awk  '{print $1}'|awk -v y=$year -v m=$mnt -F. '{print 20 y m, $1$2$3}' >> $File/"$Comb2".txt	
-								#se encuentra el dato de cada combustible y se agrega una al archivo correspondiente de la  provincia y combustible
+								#se encuentra el dato de cada combustible  y se agrega una al archivo correspondiente de la  provincia y combustible
 
 							done
 					done 
-
-
-
 			done
 	done 
