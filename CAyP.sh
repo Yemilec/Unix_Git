@@ -26,3 +26,4 @@ for Prov in "Almería" "Cádiz" "Córdoba" "Granada" "Huelva" "Jaén" "Málaga" 
 		#se crean las carpetas de las provincias dentro de su correspondiente Comunidad Autónoma
 		 
 	done 
+rm CAyP.txt
